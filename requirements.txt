@@ -1,3 +1,5 @@
+google-adk
+google-genai
 fastapi
 uvicorn
-requests
+python-dotenv
