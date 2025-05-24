@@ -9,6 +9,7 @@ from google.genai import types
 from multi_tool_agent.agent import root_agent  
 from dotenv import load_dotenv  
 import traceback
+from fastapi.middleware.cors import CORSMiddleware  
 
 # Load environment variables from .env file
 load_dotenv()  # This loads variables from .env into os.environ
@@ -25,7 +26,17 @@ session_service = InMemorySessionService()
 APP_NAME = "AI_Tutor_App"
 
 # Create FastAPI app
+
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins (replace with your frontend URL in production)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class AskRequest(BaseModel):
     prompt: str
